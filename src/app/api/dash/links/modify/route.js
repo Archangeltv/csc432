@@ -12,13 +12,13 @@ export async function POST(request) {
   if (body.operation === "alias") {
     let alias = body.value;
     console.log(alias);
-    if (TOP_LEVEL_ROUTES.includes(alias) || !validAlias(alias)) 
+    if (TOP_LEVEL_ROUTES.includes(alias) || !validAlias(alias))
       return NextResponse.json({ message: "Invalid alias." }, { status: 400 });
-    
+
     alias =
       ENVIRONMENT === "dev"
         ? "http://localhost:3000/" + body.value
-        : "http://tinyclicks.co/" + body.value;
+        : "https://csc432.vercel.app/" + body.value;
 
     const existingAlias = await Prisma.Link.findFirst({
       where: { shortURL: alias },

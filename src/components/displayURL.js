@@ -124,7 +124,7 @@ export default function DisplayUrl({ variant = "home" }) {
           ></Input>
           <Input
             startDecorator={`http://${
-              ENVIRONMENT === "dev" ? "localhost:3000/" : "tinyclicks.co/"
+              ENVIRONMENT === "dev" ? "localhost:3000/" : "csc432.vercel.app/"
             }`}
             type="text"
             id="aliasInput"
@@ -133,7 +133,9 @@ export default function DisplayUrl({ variant = "home" }) {
             onChange={(e) => {
               setAlias(
                 `http://${
-                  ENVIRONMENT === "dev" ? "localhost:3000/" : "tinyclicks.co/"
+                  ENVIRONMENT === "dev"
+                    ? "localhost:3000/"
+                    : "csc432.vercel.app/"
                 }` + e.target.value
               );
               setRawAlias(e.target.value);

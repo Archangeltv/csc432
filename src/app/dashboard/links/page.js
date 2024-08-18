@@ -389,7 +389,7 @@ export default function Links() {
                           </div>
                           <div
                             href=""
-                            className="text-[.75em] font-medium opacity-75 italic" 
+                            className="text-[.75em] font-medium opacity-75 italic"
                           >
                             {link.originalURL}
                           </div>
@@ -476,7 +476,7 @@ export default function Links() {
                             <Sheet>
                               {ENVIRONMENT === "dev"
                                 ? "localhost:3000/"
-                                : "tinyclicks.co/"}
+                                : "csc432.vercel.app/"}
                             </Sheet>
                           }
                           type="text"
