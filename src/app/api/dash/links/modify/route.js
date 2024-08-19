@@ -18,7 +18,7 @@ export async function POST(request) {
     alias =
       ENVIRONMENT === "dev"
         ? "http://localhost:3000/" + body.value
-        : "https://csc432.vercel.app/" + body.value;
+        : "http://csc432.vercel.app/" + body.value;
 
     const existingAlias = await Prisma.Link.findFirst({
       where: { shortURL: alias },

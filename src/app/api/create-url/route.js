@@ -5,7 +5,7 @@ import { validAlias } from "@/lib/shorten";
 export async function POST(request) {
   const body = await request.json(); // parse the request body
   const devDomain = "http://localhost:3000/";
-  const prodDomain = "https://csc432.vercel.app/";
+  const prodDomain = "http://csc432.vercel.app/";
   let s = body.shortURL;
   const name = body.name || null;
   const alias = body.alias || null;

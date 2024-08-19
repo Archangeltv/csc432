@@ -26,7 +26,9 @@ export default function Redirect({ params }) {
       const slug = params.slug;
       const referrer = document.referrer;
       console.log("Source: " + typeof referrer);
-      fetch(`/api/match-url?slug=${slug}&ip=${ip}&source=${referrer}&browser=${browser}&device=${device}`)
+      fetch(
+        `/api/match-url?slug=${slug}&ip=${ip}&source=${referrer}&browser=${browser}&device=${device}`
+      )
         .then((res) => {
           if (!res.ok) {
             throw new Error(res.statusText);
@@ -39,7 +41,7 @@ export default function Redirect({ params }) {
         })
         .catch((error) => {
           console.error("Error:", error);
-          window.location.assign("/");
+          // window.location.assign("/");
         });
     };
 
@@ -106,5 +108,5 @@ export default function Redirect({ params }) {
 
     return { browser: browser, device: device };
   }
-  return <div className="h-screen"></div>;
+  return <div className="h-screen">Redirecting...</div>;
 }
