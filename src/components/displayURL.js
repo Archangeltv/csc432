@@ -53,6 +53,11 @@ export default function DisplayUrl({ variant = "home" }) {
           body: JSON.stringify(urlInfo),
         })
           .then((response) => {
+            if (!response.ok) {
+              throw new Error(
+                "Alias already exists or Check internet connection"
+              );
+            }
             return response.json();
           })
           .then((data) => {
@@ -61,7 +66,10 @@ export default function DisplayUrl({ variant = "home" }) {
             console.log(variant);
             if (variant === "modal") window.location.reload();
           })
-          .catch((err) => console.log("Error:", err));
+          .catch((err) => {
+            console.error("There was an error with the request:", err);
+            alert(`Error: ${err?.message}`);
+          });
       }, 1000);
     } else {
       alert("Enter a valid URL");

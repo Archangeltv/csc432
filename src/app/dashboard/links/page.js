@@ -160,31 +160,6 @@ export default function Links() {
       );
   }
 
-  async function createCollection() {
-    const assignedUser = await assignUser();
-    console.log("test collection");
-    fetch("/api/dash/links/collections", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        userId: assignedUser.id,
-        operation: "create",
-        links: newCollectionItems,
-        name: collectionName !== null ? collectionName : "Unnamed Collection",
-      }),
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .then((info) => {
-        console.log(info);
-      })
-      .finally(() => {
-        window.location.reload();
-      });
-  }
   if (data)
     return (
       <main className="w-full h-screen grid place-items-center">
@@ -223,82 +198,10 @@ export default function Links() {
                       <Tabs>
                         <TabList>
                           <Tab>Link</Tab>
-                          <Tab>Collection</Tab>
                         </TabList>
 
                         <TabPanel value={0}>
                           <DisplayUrl variant={"modal"} />
-                        </TabPanel>
-                        <TabPanel value={1} className="flex flex-col gap-2">
-                          <Typography>Collection Name</Typography>
-                          <Input
-                            type="text"
-                            id="collectionNameInput"
-                            className="h-[40px] w-[60%] px-4 bg-gray-100 focus:outline-payne-gray focus:outline "
-                            placeholder="New Collection"
-                            onChange={(e) => {
-                              setCollectionName(e.target.value);
-                            }}
-                            autoComplete={"off"}
-                          ></Input>
-                          <div className="w-[60%]">
-                            <Typography>Add Links</Typography>
-                            <Input
-                              startDecorator={<SearchIcon />}
-                              type="text"
-                              id="collectionNameInput"
-                              className="h-[40px] px-4 bg-gray-100 focus:outline-payne-gray focus:outline "
-                              placeholder="Search"
-                              onChange={(e) => {
-                                setSearchTerm(e.target.value);
-                              }}
-                              onFocus={() => setSearchIsFocused(true)}
-                              onBlur={() => {
-                                if (!searchTerm) {
-                                  setSearchIsFocused(false);
-                                }
-                              }}
-                              autoComplete={"off"}
-                            ></Input>
-                            {searchIsFocused && searchTerm && (
-                              <div className="flex flex-col border-2 bg-white absolute w-[56%]">
-                                {filteredResults.length > 0 ? (
-                                  filteredResults.map((item, i) => {
-                                    return (
-                                      <CheckedSearchResult
-                                        key={"search-result" + i}
-                                        value={
-                                          item.name !== null
-                                            ? item.name
-                                            : item.originalURL.slice(7)
-                                        }
-                                        valueId={item.id}
-                                        isChecked={newCollectionItems.includes(
-                                          item.id
-                                        )}
-                                        setNewCollectionItems={
-                                          setNewCollectionItems
-                                        }
-                                        newCollectionItems={newCollectionItems}
-                                      />
-                                    );
-                                  })
-                                ) : (
-                                  <div className="h-[30px] flex justify-between items-center px-2">
-                                    No results found
-                                  </div>
-                                )}
-                              </div>
-                            )}
-                            <button
-                              className="py-2 px-4 bg-payne-gray hover:bg-delft-blue focus:outline-payne-gray focus:outline transition-all duration-200 text-white font-semibold rounded-lg w-[8rem] mt-2"
-                              onClick={() => {
-                                createCollection();
-                              }}
-                            >
-                              Create
-                            </button>
-                          </div>
                         </TabPanel>
                       </Tabs>
                     </ModalDialog>
@@ -614,15 +517,6 @@ export default function Links() {
               </>
             )}
           </Sheet>
-        </div>
-        <div>
-          <div>To Do:</div>
-          <ul>
-            <li>Today&apos;s Top Performer</li>
-            <li>Link Creation Here</li>
-            <li>Bulk Link Creation</li>
-            <li>Password Protection</li>
-          </ul>
         </div>
       </main>
     );
